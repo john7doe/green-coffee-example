@@ -10,6 +10,8 @@ import com.mauriciotogneri.greencoffeeexample.activities.LoginActivity;
 import com.mauriciotogneri.greencoffeeexample.test.steps.ContactListSteps;
 import com.mauriciotogneri.greencoffeeexample.test.steps.LoginSteps;
 import com.mauriciotogneri.greencoffeeexample.test.steps.ScreenshotSteps;
+import com.microsoft.appcenter.espresso.Factory;
+import com.microsoft.appcenter.espresso.ReportHelper;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,12 +36,16 @@ public class LoginFeatureTest extends GreenCoffeeTest
         super(scenarioConfig);
     }
 
-    @Parameters(name = "{0}")
+    @Rule
+    public ReportHelper reportHelper = Factory.getReportHelper();
+
+
+    @Parameters(name = "{index} {0}")
     public static Iterable<ScenarioConfig> scenarios() throws IOException
     {
         return new GreenCoffeeConfig("testapp")
                 .withFeatureFromAssets("assets/login.feature")
-                .scenarios(ENGLISH, SPANISH);
+                .scenarios(ENGLISH);
     }
 
     @Test
@@ -49,8 +55,8 @@ public class LoginFeatureTest extends GreenCoffeeTest
     }
 
     @Override
-    protected void beforeScenarioStarts(Scenario scenario, Locale locale)
+    protected void afterScenarioEnds(Scenario scenario, Locale locale)
     {
-        // do something
+        reportHelper.label(String.format("afterScenarioEnds: %s.", scenario.name()));
     }
 }

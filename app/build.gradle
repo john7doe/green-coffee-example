@@ -34,4 +34,6 @@ dependencies
     androidTestCompile 'com.android.support:support-annotations:26.1.0'
     androidTestCompile 'com.android.support.test:runner:1.0.1'
     androidTestCompile 'com.mauriciotogneri:greencoffee:2.9.0'
+    androidTestCompile('com.microsoft.appcenter:espresso-test-extension:1.2')
+
 }
